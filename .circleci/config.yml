@@ -10,8 +10,8 @@ jobs:
       - run:
           name: Install Modules
           command: |
-            pip3 install requirements.txt
-            python3 pytest.py
+            pip install -r requirements.txt
+            python pytest.py
   build:
     docker:
       - image: circleci/python:3.7.4
