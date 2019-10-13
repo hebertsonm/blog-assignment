@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  test_backend:
+    docker:
+      - image: circleci/python:3.7.4
+        environment:
+          TZ: "America/Vancouver"
+    steps:
+      - checkout
+      - run:
+          name: Install Modules
+          command: |
+            pip3 install requirements.txt
+            python3 pytest.py
+  build:
+    docker:
+      - image: circleci/python:3.7.4
+    steps:
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Build Docker image
+          command: |
+            TAG=${CIRCLE_TAG:-"dev"}
+            SHORT_SHA=$(echo $CIRCLE_SHA1 | cut -c -7)
+            VERSION=${TAG}@${SHORT_SHA}
+            docker build -t hebertsonm/blogea:$TAG --build-arg version=${VERSION} .
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+            docker push hebertsonm/blogea:$TAG
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - test_backend
+      - build:
+          requires:
+            - test_backend
