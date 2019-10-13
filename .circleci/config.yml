@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Install Modules
           command: |
-            pip install -r requirements.txt
+            pip install --user -r requirements.txt
             python pytest.py
   build:
     docker:
