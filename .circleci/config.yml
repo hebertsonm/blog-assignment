@@ -10,12 +10,13 @@ jobs:
       - run:
           name: Install Modules
           command: |
-            pip3 install requirements.txt
-            python3 pytest.py
+            pip install --user -r requirements.txt
+            python pytest.py
   build:
     docker:
       - image: circleci/python:3.7.4
     steps:
+      - checkout
       - setup_remote_docker:
           docker_layer_caching: true
       - run:
