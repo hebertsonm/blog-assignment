@@ -1,6 +1,8 @@
 import datetime
 
 class Posts():
+    # Defines Blog properties and methods
+    # Initialize object with title, article(body) and author
     def __init__(self, title, body, author):
         self._post = {
             'title': title,
@@ -30,6 +32,8 @@ class Posts():
         return self._comments
 
     def add_comment(self, body, author):
+        # Comments are added, but not removed
+        # content(body) and author are mandatory
         self._comments.append(
             {
             'body': body,

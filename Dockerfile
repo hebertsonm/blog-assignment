@@ -1,16 +1,11 @@
 FROM python:3.7.4-alpine3.9 AS build
 
-# RUN apk update \
-#     && apk add postgresql-client libffi-dev gcc musl-dev postgresql-dev
-WORKDIR /blogEA
 COPY requirements.txt .
 RUN pip3 install --user -r requirements.txt
 
-COPY ./*.py ./
-
 # Create image and copy requirements from build image. Also, install only
 # essential packages for running the app. It reduces the image size 
-# from 319 to 165 Mb
+# from 113 to 105 Mb. Original size is 98.5MB.
 FROM python:3.7.4-alpine3.9 
 
 WORKDIR /blogEA
