@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: blogea
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+  - host: blogea.westus2.cloudapp.azure.com
+    http:
+      paths:
+      - path: /blog(/|$)(.*)
+        backend:
+          serviceName: blogea
+          servicePort: 80
