@@ -74,7 +74,6 @@ kubectl apply -f ingress.yaml
 ## Auto deployments with Keel
 Keel redeploys the app whenever the new version of the image is available.
 It watches the registry by polling or using a webhook.
-At this moment it's used only on Alpha cluster to redeploy the feature releases.
 ```bash
 kubectl apply -f keel-rbac.yaml
 ```
