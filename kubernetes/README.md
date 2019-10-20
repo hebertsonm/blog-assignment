@@ -62,3 +62,19 @@ sh dns.sh
 ```
 Copy FQDN from the output (e.g. blogea.westus2.cloudapp.azure.com), this is the load balancer's domain name.
 Tip: Set a custom domain (e.g blog.ea.com) to send traffic for the domain above.
+
+# Application Deployment
+```bash
+kubectl apply -f env.yaml
+kubectl apply -f blog-deployment.yaml
+kubectl apply -f ingress.yaml
+```
+
+# Operations
+## Auto deployments with Keel
+Keel redeploys the app whenever the new version of the image is available.
+It watches the registry by polling or using a webhook.
+At this moment it's used only on Alpha cluster to redeploy the feature releases.
+```bash
+kubectl apply -f keel-rbac.yaml
+```
