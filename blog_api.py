@@ -60,4 +60,4 @@ def post_comments(post_id):
     return 'comment posted successfully!'
 
 if __name__ == '__main__':
-    api.run()
+    api.run(host='0.0.0.0')
