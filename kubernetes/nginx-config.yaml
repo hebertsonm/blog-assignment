@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-conf
+data:
+  nginx.conf: |
+    server {
+    listen      82;
+    server_name  localhost;
+
+    location ~ ^/(.*)$ {
+        #proxy_pass         "http://172.19.0.2:5000/$1";
+        proxy_pass         "http://127.0.0.1:5000/$1";
+        proxy_redirect     off;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+        fastcgi_read_timeout 300s;
+        proxy_read_timeout 300;
+      }
+      error_log  /var/log/nginx/api-error.log;
+      access_log /var/log/nginx/api-access.log;
+    }
