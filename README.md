@@ -37,4 +37,4 @@ This solution is avaliable at the address `http://blogea.westus2.cloudapp.azure.
 
 An `ingress` was set to route all incomming traffic from blogea.westus2.cloudapp.azure.com DNS to a `service` in charge to load balance the traffic to two `pod` replicas including this API.
 
-Kubernetes inventory files are not provided in this repository at the moment.
+Kubernetes inventory files are included in this repository, where there is a specific README file with deployment details.
