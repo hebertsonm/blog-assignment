@@ -10,7 +10,7 @@ metadata:
   annotations:
     keel.sh/pollSchedule: "@every 1m"
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: blogea
@@ -37,8 +37,21 @@ spec:
         tty: true
       # imagePullSecrets:
       #   - name: dockerhub
+      - name: nginx
+        image: nginx:1.17.1
+        ports:
+        - containerPort: 82
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d
+          name: nginx-conf
       restartPolicy: Always
-
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: nginx-conf
+          items:
+            - key: nginx.conf
+              path: nginx.conf
 ---
 kind: Service
 apiVersion: v1
@@ -49,5 +62,5 @@ spec:
     app: blogea
   ports:
   - protocol: TCP
-    port: 80
-    targetPort: 5000
+    port: 5000
+    targetPort: 82
