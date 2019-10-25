@@ -6,6 +6,11 @@ api = Flask(__name__)
 posts = [] # Create posts list to receive a list of Post objects
 INDEX_NOT_FOUND = 'Index not found'
 
+# Initial page
+@api.route('/')
+def home():
+    return "Blog EA backend"
+
 # Define blog post APIs
 @api.route('/api/post/<int:post_id>', methods=['GET'])
 def get_post(post_id):
@@ -60,4 +65,4 @@ def post_comments(post_id):
     return 'comment posted successfully!'
 
 if __name__ == '__main__':
-    api.run(host='0.0.0.0')
+    api.run(debug=True)

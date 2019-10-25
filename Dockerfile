@@ -16,4 +16,5 @@ ENV PATH=/root/.local/bin:$PATH
 COPY ./*.py ./
 EXPOSE 5000
 
-ENTRYPOINT ["/usr/local/bin/python", "blog_api.py"]
+#ENTRYPOINT ["/usr/local/bin/python", "blog_api.py"]
+ENTRYPOINT ["gunicorn", "-b", "0.0.0.0:5000", "blog_api:api"]
